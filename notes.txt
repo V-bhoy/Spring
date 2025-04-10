@@ -1,0 +1,78 @@
+What is spring framework?
+
+Why?
+- it was developed by Rod johnson in 2003
+Before Spring, in traditional java there were few problems due to
+which it became difficult for developers to maintain the java applications at
+enterprise level
+1. Tight Coupling - one class is highly dependent on another class to function.
+If you change one class, you might need to change others too.
+This makes your code hard to maintain and test.
+Example: 	•	OrderService is creating PaymentService using new.
+         	•	If you want to change PaymentService (e.g., switch to another payment gateway),
+         	    you have to change OrderService code.
+         	•	Hard to test: You can’t inject a mock version of PaymentService.
+Loose coupling - Loose Coupling means one class depends on an interface or an external object,
+not directly on a specific implementation. Changes in one class won’t affect the other.
+In the above example , if you create a parameterized constructor by injecting the payment service object
+and then assigning it into the order service,
+Now, OrderService doesn’t care how PaymentService is implemented.
+ 	•	You can use CreditCardPaymentService, UPIPaymentService, or even a mock for testing.
+2. Difficult Testing - Hard to write unit tests due to tightly coupled classes
+3. Boilerplate Code - Tons of repetitive code for JDBC, transactions, servlets, etc.
+4. Complex Configuration - Required XML configurations (web.xml, etc.) for everything
+5. Manual transaction handling - Developers had to manually begin/commit/rollback transactions
+
+Spring automates this using dependency injection and manages object lifecycles, configurations, logging, security,
+transactions etc. It helps developers focus on business logic instead of wiring and configuration.
+In short, it is a dependency injection framework to make java application loosely coupled making it easy to develop
+enterprise level apps.
+
+Answer -
+Spring is a third-party framework built on top of Java to make building applications
+easier, faster, and more modular.
+- Java-based framework. (framework of frameworks)
+- open-source
+- light weight
+- helps you build robust, secure, testable, and loosely coupled enterprise-level applications.
+- We use Spring because it reduces boilerplate code,
+  manages dependencies, and gives us a complete ecosystem to build full-stack applications easily using the
+  modules that it provides.
+Enterprise-level applications are large-scale systems used by businesses and organizations to manage operations, users,
+and data — like banking systems, ERP tools, or hospital management systems.
+These apps need scalability, security, and modularity, so frameworks like Spring are ideal.
+On the other hand, core Java is great for small utilities, learning, and non-enterprise applications.
+
+What is dependency injection?
+it is a design pattern where spring automatically creates an object of one class and injects it into the other
+class without the need for manually creating an object at runtime
+And this whole process is nothing but inversion of control where we hand over the object creation control to the
+spring framework
+
+Now spring provides several modules that provides services and API.
+each providing specific functionalities to aid in the development of Java applications.
+These modules are typically grouped into categories:
+It has 4 core modules - (Core Container)
+1. core - Provides the fundamental parts of the framework, including dependency injection and bean container functionalities.
+2. beans - Offers BeanFactory, a sophisticated implementation of the factory pattern.
+3. context - Builds on the Core and Beans modules to provide a way to access objects in a framework-style manner,
+4. spEL (spring expression language) - Enables querying and manipulation of an object graph at runtime.
+Data access / integration -
+1. JDBC - Simplifies database access and error handling.
+2. ORM - Integrates with ORM frameworks like Hibernate and JPA.
+3. OXM - Supports Object/XML mapping implementations.
+4. JMS (Java Messaging service) - Facilitates the production and consumption of messages.
+Web
+1. Web - Provides basic web-oriented integration features.
+2. Web MVC - Implements the Model-View-Controller design pattern for web applications.
+3. Web WebSocket - Supports WebSocket-based, two-way communication between client and server.
+AOP (Aspect Oriented Programming)
+1. AOP - Enables aspect-oriented programming implementation, allowing separation of cross-cutting concerns.
+2. Aspect - Provides integration with AspectJ, a powerful AOP framework.
+Other -
+1. Instrumentation - Supports class instrumentation and classloader implementations, useful in certain application servers.
+2. Messaging - Provides support for STOMP as the WebSocket subprotocol to use in applications.
+3. Test - Supports testing of Spring components with JUnit or TestNG.
+
+Latest stable version is - 6.2.5, it needs jdk 17 minimum
+
