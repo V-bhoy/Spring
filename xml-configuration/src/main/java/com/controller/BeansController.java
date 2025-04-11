@@ -58,6 +58,7 @@ public class BeansController {
         // By default, the container uses setter injection defined by property tag in xml
         // if value is not provided, the container wont call the setter method and print null
         // Spring only injects what you specify
+        // Make sure that the beans id/name are unique across all xml files
         ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml",
                 "collection_beans.xml", "reference_beans.xml", "constructor_injection.xml");
         // The bean is created in advance  as soon as the application context is instantiated
