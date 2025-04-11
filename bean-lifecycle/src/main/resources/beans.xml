@@ -7,4 +7,5 @@
 <!--    The init-method and destroy-method attribute is used to define -->
 <!--    the init and destroy methods specific to the bean-->
     <bean id="cake" class="com.entity.Cake" p:flavour="chocolate" p:price="200" init-method="init" destroy-method="destroy"/>
+    <bean id="pastry" class="com.entity.Pastry" p:flavour="vanilla" p:price="60"/>
 </beans>

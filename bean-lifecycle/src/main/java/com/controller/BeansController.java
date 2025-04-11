@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.entity.Cake;
+import com.entity.Pastry;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -47,10 +48,19 @@ public class BeansController {
         //	•	Closes the context
         //	•	Calls destroy() on singleton beans
         //	•	Frees resources
-        
+
         AbstractApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+        context.registerShutdownHook();
+
         Cake cake = context.getBean("cake", Cake.class);
         System.out.println(cake);
-        context.registerShutdownHook();
+
+        // implementing lifecycle callbacks using interfaces InitializingBean and DisposableBean
+        // when implementing InitializingBean we need to implement method afterPropertiesSet which
+        // is similar to init()
+        // when implementing DisposableBean we need to implement destroy()
+
+        Pastry pastry = context.getBean("pastry", Pastry.class);
+        System.out.println(pastry);
     }
 }
