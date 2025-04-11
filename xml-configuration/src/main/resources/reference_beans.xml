@@ -1,0 +1,19 @@
+<!--The ref element with the bean attribute or the ref attribute is used to inject a dependency / property-->
+<!--referring to other bean/entity-->
+
+<beans  xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:p="http://www.springframework.org/schema/p"
+        xsi:schemaLocation="
+         http://www.springframework.org/schema/beans
+         https://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="b1" class="com.entity.B" p:y="20"/>
+    <bean id="a1" class="com.entity.A" p:x="10">
+        <property name="bInstance" ref="b1"/>
+<!--        <property name="bInstance">-->
+<!--            <ref bean="bObj"/>-->
+<!--        </property>-->
+    </bean>
+<!--    using p schema -->
+    <bean id="a2" class="com.entity.A" p:x="30" p:bInstance-ref="b1"/>
+</beans>
