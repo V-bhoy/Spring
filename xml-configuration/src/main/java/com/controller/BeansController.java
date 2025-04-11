@@ -1,11 +1,14 @@
 package com.controller;
 
+import com.entity.Employee;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import com.entity.User;
+
+import java.util.List;
 
 public class BeansController {
     public static void main(String[] args) {
@@ -56,9 +59,9 @@ public class BeansController {
         // By default, the container uses setter injection defined by property tag in xml
         // if value is not provided, the container wont call the setter method and print null
         // Spring only injects what you specify
-        ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+        ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml", "collection_beans.xml");
         // The bean is created in advance  as soon as the application context is instantiated
-        // user3 and user1 is pointing to the same bean, since it was already created
+        // user3 and user1 is pointing to the same bean, since the bean scope is singleton by default
         User user1 = context.getBean("user1", User.class);
         User user2 = context.getBean("user2", User.class);
         User user3 = context.getBean("user1", User.class);
@@ -66,6 +69,10 @@ public class BeansController {
         System.out.println(user2);
         System.out.println(user3.hashCode());
         System.out.println(user1.hashCode());
+
+        // injecting collections
+        Employee employee = context.getBean("e1", Employee.class);
+        System.out.println(employee);
     }
 
 }

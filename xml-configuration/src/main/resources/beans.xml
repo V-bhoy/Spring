@@ -6,6 +6,8 @@
 <!--refers The Java class to be instantiated.-->
 <!--The ID/name attribute is the name by which you refer to it and class attribute defines the classpath-->
 <!--It includes any dependencies like fields via <property> or <constructor-arg>-->
+<!--The property tag has name attribute that is the field name and
+value attribute or value element for injecting values -->
 <!--You need to add p schema to add values using p in beans tag-->
 
 <beans  xmlns="http://www.springframework.org/schema/beans"
