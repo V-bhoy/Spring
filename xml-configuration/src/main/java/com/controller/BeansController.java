@@ -87,7 +87,18 @@ public class BeansController {
 
         // constructor injection setting fields via constructor using constructor-arg tag in xml
         Person p1 = context.getBean("p1", Person.class);
+        Person p2 = context.getBean("p2", Person.class);
         System.out.println(p1);
+        System.out.println(p2);
+        // testing ambiguity
+//        Constructor injection ambiguity arises when:
+//	•	A class has multiple constructors,
+//	•	Spring cannot clearly decide which one to use during dependency injection via XML.
+        // first comment out the string arg constructor, reverse the orders of the int and double
+        // constructor and observe the output
+        // then include the string arg constructor and again observe the output
+        Addition a1 = context.getBean("add", Addition.class);
+        a1.doSum();
     }
 
 }

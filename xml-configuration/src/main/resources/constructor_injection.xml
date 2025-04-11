@@ -4,11 +4,26 @@
         xsi:schemaLocation="
          http://www.springframework.org/schema/beans
          https://www.springframework.org/schema/beans/spring-beans.xsd">
-<!--    you can inject collection in the same way when using setter injection with property tag-->
     <bean id="c1" class="com.entity.Certificate" c:name="Java"/>
     <bean id="p1" class="com.entity.Person">
         <constructor-arg name="id" value="101" type="int"/>
         <constructor-arg name="name" value="person-1"/>
         <constructor-arg name="certificate" ref="c1"/>
+    </bean>
+<!--    use indexes when using c schema to avoid exceptions-->
+    <bean id="p2" class="com.entity.Person" c:_0="102" c:_1="person-2" c:_2-ref="c1"/>
+
+<!--    By default, the constructor args treat these values as string if type or index atrribute are not present -->
+<!--    case 1: when there is no constructor with string arg, it will chose the constructor-->
+<!--    based on order-->
+<!--    if double constructor is first serially, it is called otherwise the int constructor-->
+<!--    case 2: when there is a constructor with string arg, that constructor is called-->
+<!--    To resolve this ambiguity you can mention the type attribute and-->
+<!--    the index attribute in the constructor arg-->
+<!--    irrespective of int-->
+    <bean id="add" class="com.entity.Addition">
+        <constructor-arg value="10" type="int" index="0"/>
+        <constructor-arg value="20" type="int" index="1"/>
+        <constructor-arg value="30" type="int" index="2"/>
     </bean>
 </beans>
