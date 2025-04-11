@@ -1,0 +1,20 @@
+<!-- beans tag -->
+<!--It’s mandatory.-->
+<!--It defines the XML namespace and schema.-->
+<!--Contains one or more <bean> elements.-->
+<!--bean tag-->
+<!--refers The Java class to be instantiated.-->
+<!--The ID attribute is the name by which you refer to it.and class attribute defines the classpath-->
+<!--It includes any dependencies like fields via <property> or <constructor-arg>.-->
+
+<beans  xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+         http://www.springframework.org/schema/beans
+         https://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="user" class="com.entity.User">
+        <property name="id" value="101"></property>
+        <property name="name" value="sonal"></property>
+        <property name="address" value="pune"></property>
+    </bean>
+</beans>

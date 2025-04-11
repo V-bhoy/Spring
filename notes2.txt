@@ -1,0 +1,91 @@
+What is spring framework?
+- java based framework
+- opensource
+- light weight
+- used to create robust, secure, testable and loosely coupled enterprise level java applications
+- making it easier for developers to maintain and scale them allowing to focus on business logic
+- without having a need to manage dependencies and complex configuration
+
+What are the features of spring framework?
+- has a special design principle known as inversion of control where it automatically creates the object and
+  inject dependencies promoting loose coupling between the components, managing bean lifecycle.
+- The AOP (Aspect Oriented Programming) part of Spring supports unified development by
+  ensuring separation of application’s business logic from other system services like logging, security, transactions etc
+- it has modular architecture where we can use only the parts needed: core, JDBC, MVC, etc.
+- follows layered architecture pattern that helps in the necessary components selection
+  along with providing a robust and cohesive framework for J2EE applications development.
+- provides highly configurable MVC web application framework
+  which has the ability to switch to other frameworks easily with full support for annotations and REST.
+- It simplifies managing database transactions without writing boilerplate code.
+- provides a convenient API to translate technology-specific exceptions (thrown by JDBC, Hibernate or other frameworks)
+  into consistent, unchecked exceptions. This introduces abstraction and greatly simplifies exception handling.
+
+What is spring configuration file ?
+- it is an XML file that mainly contains the classes information
+  and describes how those classes are configured and linked to each other.
+
+What is a bean?
+- object / instance of a POJO class
+- The beans are created with the configuration metadata
+that the users supply to the container (by means of XML or java annotations configurations.)
+- They are wired and managed by IOC container
+
+What is IOC ?
+- We dont create object manually, spring does that for us
+- Instead of your code controlling object creation,
+  Spring inverts that control and handles object creation, wiring (dependencies), and lifecycle
+  automatically at runtime.
+
+  What is IOC container?
+  - The IOC Container is the core of the Spring Framework.
+  - it uses Dependency Injection (DI) for managing the application components
+  - By:
+    	1.	Creating objects (beans)
+    	2.  Injects dependencies into them
+    	3.	Managing their lifecycle
+    	4.	Configures them using metadata (annotations or XML)
+  In short, it manages Java objects (beans) from creation to destruction — using Dependency Injection.
+  - Now the information(metadata) regarding how and what type of objects need to be created,
+    and which services are needed by which components is described in the configuration file
+  - Spring’s IOC Container reads bean configuration (via XML, annotations, or Java config),
+    instantiates objects, injects their dependencies, and manages their lifecycle
+    so that the application code doesn’t need to create or wire objects manually.
+
+What do you understand by DI?
+ - Dependency Injection is a design pattern where the dependencies (objects a class needs)
+   are provided by an external source (like the Spring IOC Container) instead of the class creating them itself.
+
+ Types of Dependency Injection in Spring
+1. Constructor Injection - Dependencies are passed via the class constructor called by IOC
+2. Setter Injection - Dependencies are injected via public setter methods called by IOC after instantiating the bean
+3. Field Injection - Dependencies are injected directly into fields via annotations like @Autowired
+Constructor injection is preferred for mandatory dependencies,
+setter injection for optional ones, and field injection is discouraged due to poor testability and tight coupling.
+
+Difference between constructor and setter injection?
+- partial injection (allowed in SI)
+- overriding the setter property (true for SI)
+- creation of new instance upon modification (supported by CI)
+- If bean has ---> many properties (CI is preferred) , few properties (SI is preferred)
+
+2 types of IOC container -
+  1. Bean factory - Lightweight container, used when memory/resource is limited. Suitable for simple apps.
+  2. Application Context - More powerful, commonly used. Adds features like internationalization, event propagation, AOP, etc.
+
+Difference between bean factory and application context -
+1. BF - basic container (parent interface)
+   AC - advanced container which is built on top of bean factory (child interface with extra features)
+2. BF - bean initialization is lazy (loaded on demand)
+   AC - it is eager (objects are created in advance)
+3. BF - does not manage complete application lifecycle
+   AC - manages complete application lifecycle
+4. BF - basic resource loading capabilities (xml configuration file etc)
+   AC - advance resource loading capabilities
+5. BF - limited support to autowiring
+   AC - comprehensive support to autowiring
+6. BF - limited integration with spring features
+   AC - rich integration with spring features
+7. BF - internationalization is not supported (it is language specific)
+   AC - it is supported
+
+Explain the bean lifecycle in the bean factory.
