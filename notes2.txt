@@ -89,3 +89,28 @@ Difference between bean factory and application context -
    AC - it is supported
 
 Explain the bean lifecycle in the bean factory.
+- When spring creates and manages the bean, it goes through following phases
+1. Instantiation -
+	•	Spring creates an object of the bean using the constructor.
+	•	No properties are set at this point.
+2. Populate properties (Dependency Injection)
+	•	Spring injects values or dependencies into the bean — via constructor or setter.
+	•	This is when fields like id, name, or references are set.
+3. Set Bean Name (Optional)
+	•	If the bean implements BeanNameAware, Spring calls: setBeanName(String name)
+4. Set Bean Factory (Optional)
+	•	If the bean implements BeanFactoryAware, Spring calls: setBeanFactory(BeanFactory beanFactory)
+5.  Set Application Context (Optional)
+	•	If the bean implements ApplicationContextAware, Spring injects the ApplicationContext.
+6.  Pre-Initialization (BeanPostProcessor – before init)
+	•	Any custom logic defined in BeanPostProcessor's postProcessBeforeInitialization() is run.
+7.  Initialization
+	•	If the bean implements InitializingBean, Spring calls: afterPropertiesSet()
+	•	OR if you specify an init-method in XML or @PostConstruct in annotations, Spring calls that too.
+8.  Post-Initialization (BeanPostProcessor – after init)
+	•	BeanPostProcessor's postProcessAfterInitialization() is called here for further customization
+	    that is needed post creation. After this bean is ready
+9.  Destruction
+	•	When the container is shutting down (in case of ApplicationContext):
+	•	If the bean implements DisposableBean, Spring calls: destroy()
+    •	OR if you defined a destroy-method in XML or used @PreDestroy, Spring invokes that.
