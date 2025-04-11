@@ -58,8 +58,14 @@ public class BeansController {
         // Spring only injects what you specify
         ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
         // The bean is created in advance  as soon as the application context is instantiated
-        User user = context.getBean("user", User.class);
-        System.out.println(user);
+        // user3 and user1 is pointing to the same bean, since it was already created
+        User user1 = context.getBean("user1", User.class);
+        User user2 = context.getBean("user2", User.class);
+        User user3 = context.getBean("user1", User.class);
+        System.out.println(user1);
+        System.out.println(user2);
+        System.out.println(user3.hashCode());
+        System.out.println(user1.hashCode());
     }
 
 }
