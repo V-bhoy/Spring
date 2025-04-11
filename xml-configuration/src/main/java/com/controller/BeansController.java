@@ -1,14 +1,11 @@
 package com.controller;
 
-import com.entity.A;
-import com.entity.B;
-import com.entity.Employee;
+import com.entity.*;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import com.entity.User;
 
 import java.util.List;
 
@@ -62,7 +59,7 @@ public class BeansController {
         // if value is not provided, the container wont call the setter method and print null
         // Spring only injects what you specify
         ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml",
-                "collection_beans.xml", "reference_beans.xml");
+                "collection_beans.xml", "reference_beans.xml", "constructor_injection.xml");
         // The bean is created in advance  as soon as the application context is instantiated
         // user3 and user1 is pointing to the same bean, since the bean scope is singleton by default
         User user1 = context.getBean("user1", User.class);
@@ -72,15 +69,25 @@ public class BeansController {
         System.out.println(user2);
         System.out.println(user3 == user1);
 
+        System.out.println("\n-------------------------------------------------------------\n");
+
         // injecting collections
         Employee employee = context.getBean("e1", Employee.class);
         System.out.println(employee);
+
+        System.out.println("\n-------------------------------------------------------------\n");
 
         // injecting other bean through reference
         B b = context.getBean("b1", B.class);
         A a = context.getBean("a1", A.class);
         System.out.println(a);
         System.out.println(b);
+
+        System.out.println("\n-------------------------------------------------------------\n");
+
+        // constructor injection setting fields via constructor using constructor-arg tag in xml
+        Person p1 = context.getBean("p1", Person.class);
+        System.out.println(p1);
     }
 
 }
