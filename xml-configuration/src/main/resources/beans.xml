@@ -17,9 +17,9 @@ value attribute or value element for injecting values -->
          http://www.springframework.org/schema/beans
          https://www.springframework.org/schema/beans/spring-beans.xsd">
     <bean id="user1" class="com.entity.User">
-        <property name="id" value="101"></property>
-        <property name="name" value="sonal"></property>
-        <property name="address" value="pune"></property>
+        <property name="id" value="101"/>
+        <property name="name" value="sonal"/>
+        <property name="address" value="pune"/>
     </bean>
     <bean id="user2" class="com.entity.User" p:id="102" p:name="raj" p:address="mumbai">
     </bean>
