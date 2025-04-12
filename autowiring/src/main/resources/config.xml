@@ -1,0 +1,41 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       https://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd">
+
+<!--    The autowire attribute is used to enable autowiring-->
+
+  <bean id="address"  class="com.entity.Address" p:city="pune" p:street="JM road"/>
+<!--  <bean id="address1"  class="com.entity.Address" p:street="GG chowk" p:city="pcmc"/>-->
+
+<!--    The byName mode will check for the bean that matches the name of the reference object in the entity-->
+<!--    In this case, the employee class is dependent on the address class defined by name address in the entity-->
+<!--    so it will check for the id/name attribute having name address-->
+<!--    if the field name was address1 instead of address, it wouldn't find any bean matching with name addresss1-->
+<!--    and it will print null for that -->
+  <bean id="e1" class="com.entity.Employee" autowire="byName">
+     <property name="name" value="e1"/>
+  </bean>
+
+<!--    The byType mode will check for the type of the fieldName in entity defined by the class attribute in bean tag-->
+<!--    In this case it will search for the type Address while scanning beans-->
+<!--    In case of multiple beans with the same type, spring will get confused to inject which bean
+        since it has two beans of the same type and it will throw an exception saying it expected one object bur found 2-->
+    <bean id="e2" class="com.entity.Employee" autowire="byType">
+       <property name="name" value="e2"/>
+    </bean>
+
+
+<!--The constructor mode will check for the constructor having most arguments and will inject that bean-->
+<!--    where a constructor argument type matches at least one bean of same type-->
+<!--    In this case it will look for a constructor and find a bean of type Address since -->
+<!--    it is expecting one bean with type Address -->
+<!--    If multiple beans of same type is found it does not inject anything, it will simply print null-->
+    <bean id="e3" class="com.entity.Employee" autowire="constructor">
+        <property name="name" value="e3"/>
+    </bean>
+</beans>
