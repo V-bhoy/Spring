@@ -2,6 +2,7 @@ package com.controller;
 
 import com.entity.Cake;
 import com.entity.Pastry;
+import com.entity.Pizza;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -62,5 +63,14 @@ public class BeansController {
 
         Pastry pastry = context.getBean("pastry", Pastry.class);
         System.out.println(pastry);
+
+
+        // implementing lifecycle callback using annotations
+
+        Pizza pizza = context.getBean("pizza", Pizza.class);
+        System.out.println(pizza);
+
+        // The init methods are called in the order of the beans in xml file
+        // And destroy method is called uin reverse manner if you observe the output
     }
 }
