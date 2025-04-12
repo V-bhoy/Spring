@@ -140,3 +140,6 @@ What are pros & cons of autowiring?
 Pros - less code & simple configuration
 Cons - no control, can introduce ambiguity when having multiple beans with similar type, cannot be used for
       primitive & string values
+
+What is a bean scope? Explain each.
+- refer the bean scope demo repo for the answer
