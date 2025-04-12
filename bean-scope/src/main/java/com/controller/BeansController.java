@@ -25,6 +25,7 @@ public class BeansController {
         // 2. session - one bean per http session
         // 3. application - one bean per servlet context
         // 4. websocket - one bean per websocket session
+        // 5. Global-session: The scope of the bean definition here is a Global HTTP session.
 
         ApplicationContext context = new ClassPathXmlApplicationContext("config.xml");
         Student s1 = context.getBean("s1", Student.class);
