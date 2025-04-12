@@ -24,7 +24,7 @@ public class BeansController {
         // it is used on the fields to inject values in them
         // for injecting values for a collection field, you can create a standalone collection
         // in xml file and then include its id in @Value enclosed in #{}
-        
+
         ApplicationContext context = new ClassPathXmlApplicationContext("config.xml");
         Student s1 = context.getBean("s1", Student.class);
         System.out.println(s1);
