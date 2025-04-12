@@ -114,3 +114,29 @@ Explain the bean lifecycle in the bean factory.
 	•	When the container is shutting down (in case of ApplicationContext):
 	•	If the bean implements DisposableBean, Spring calls: destroy()
     •	OR if you defined a destroy-method in XML or used @PreDestroy, Spring invokes that.
+
+What is bean wiring?
+- process of connecting beans with each other inside a container so the spring knows which bean depends on
+which other bean.
+- this linking is done manually by using ref attribute or element where we manually tell spring
+that which bean is dependent on the other bean inside the container inside xml
+- The same thing is also automated in spring which is called autowiring, where we dont need to specify
+the references of the dependencies, it is automatically handled either by xml or annotations
+
+What is auto wiring?
+- Autowiring is a feature provided by Spring that automatically injects the dependent beans into a class
+without explicitly specifying them in configuration (like XML or Java config).
+- Manually wiring beans can be repetitive. Autowiring helps reduce boilerplate and simplifies the configuration.
+- Spring looks for a matching bean in the container based on type (or sometimes name or constructor) and injects it automatically.
+- achieved by xml or annotation @Autowired
+Modes -
+no (default) - No autowiring. You wire manually using <constructor-arg> or <property>.
+byName - Spring injects a bean whose id/name matches the property name.
+byType - Spring injects a bean by matching type (class/interface).
+constructor - Injects dependencies through the constructor by type.
+autodetect (deprecated since spring 3) - Chooses between constructor or byType (not used in modern Spring).
+
+What are pros & cons of autowiring?
+Pros - less code & simple configuration
+Cons - no control, can introduce ambiguity when having multiple beans with similar type, cannot be used for
+      primitive & string values
