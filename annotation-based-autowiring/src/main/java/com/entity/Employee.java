@@ -1,11 +1,13 @@
 package com.entity;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 public class Employee {
     private String name;
 
     @Autowired
+    @Qualifier(value = "address2")
     private Address address;
     private Course course;
     private Department department;

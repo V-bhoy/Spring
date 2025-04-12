@@ -8,6 +8,7 @@
        https://www.springframework.org/schema/context/spring-context.xsd">
   <context:annotation-config />
   <bean id="address"  class="com.entity.Address" p:city="pune" p:street="JM road"/>
+  <bean id="address2" class="com.entity.Address" p:city="mumbai" p:street="abc street"/>
   <bean id="course" class="com.entity.Course" p:name="Java"/>
   <bean id="department" class="com.entity.Department" p:name="IT"/>
   <bean id="e1" class="com.entity.Employee" p:name="e1"/>
