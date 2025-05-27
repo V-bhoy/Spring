@@ -1,0 +1,66 @@
+✅ 1. Why are we using redirect: in Spring MVC?
+
+We use redirect: in Spring MVC to redirect the user’s browser to a different URL after a POST request.
+
+✳️ Common Use Case — Post/Redirect/Get Pattern (PRG)
+
+When a form is submitted via POST, we usually redirect to a GET endpoint after processing. This avoids issues like:
+	•	Form resubmission if the user refreshes the page (which can re-trigger a POST).
+	•	Cleaner URLs in the browser.
+
+@PostMapping("/register")
+public String registerCar(@ModelAttribute Car car) {
+    // Save logic here
+    return "redirect:/car/" + car.getRegistrationNumber(); // Safe GET redirect
+}
+
+So instead of returning a view like "carDetails", we redirect to a URL (/car/ABC123), which will be handled by a GET controller.
+
+✅ 2. When should you use redirect:?
+
+Use redirect: when:
+	•	You want to avoid form resubmission on page refresh (especially after POST).
+	•	You want to change the URL in the browser after an operation (e.g., /success or /details/123).
+	•	You want to redirect to another controller handler, not a view.
+
+Don’t use redirect if you just want to return a view (e.g., return "home";).
+
+✅ 3. Why use @RequestParam(required = false)?
+
+By default, @RequestParam expects the parameter to be present in the URL/query string. If it’s missing, and you didn’t mark it optional, Spring throws an error.
+
+❌ Example that fails:
+
+@GetMapping("/car")
+public String getCar(@RequestParam String owner) {
+    // Error if `owner` is not provided
+}
+
+✅ Safer version:
+
+@GetMapping("/car")
+public String getCar(@RequestParam(required = false) String owner) {
+    // Will work even if owner is missing
+}
+
+So required = false makes the param optional.
+
+✅ 4. Is @RequestParam required in the URL mapping?
+
+No — @RequestParam is used to extract query parameters from the URL, not from the path.
+
+@GetMapping("/car/details")
+public String getDetails(@RequestParam String owner) { }
+
+You call this with:
+/car/details?owner=Vaishali
+
+You do not include the param in the @RequestMapping path itself.
+
+If you want to extract values from the path, use @PathVariable instead:
+@GetMapping("/car/{id}")
+public String getById(@PathVariable int id) { }
+
+Annotation	Purpose	Source	Optional?
+@RequestParam	Extract query param	URL like ?key=value	Yes, with required=false
+@PathVariable	Extract from path segment	URL like /car/123	No by default

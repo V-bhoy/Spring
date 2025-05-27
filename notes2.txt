@@ -1,3 +1,31 @@
+🧩 Before Spring: What Was the Problem?
+1. Too Much Boilerplate Code
+In early Java EE (Java Enterprise Edition) or J2EE days:
+	•	You had to write tons of XML configuration.
+	•	Even doing simple things like database access (JDBC) required multiple lines of repetitive try-catch-finally blocks.
+	•	For dependency management, you had to manually create and wire objects in code.
+➡️ Developers spent more time writing plumbing code than business logic.
+2. Tight Coupling of Components
+	•	Classes were tightly coupled — you’d directly instantiate dependencies using new.
+	•	This made unit testing hard, and code harder to maintain and extend.
+➡️ Changing one part of the app often meant rewriting other parts.
+3. Hard-to-Test Code
+	•	Due to tight coupling and lack of proper dependency injection, unit testing became difficult.
+	•	You often needed a full server (like Tomcat or JBoss) just to test simple features.
+4. Heavyweight Containers
+	•	Java EE frameworks like EJB (Enterprise JavaBeans) were heavy and slow.
+	•	You had to deploy your application into a full-blown application server just to run or test.
+5. Poor Modularization
+	•	Without clear structure or separation of concerns, business logic, configuration, and framework code were often mixed.
+	•	Harder to manage large projects and codebases.
+Feature	---> Java EE / Core Java |	Spring
+DI mechanism -->	Manual, scattered |	Centralized IoC container
+Testing -->	Hard (tightly coupled)	| Easy (loosely coupled, mockable)
+ORM support	--> Hibernate alone	| Hibernate + DI + transactions
+Configuration -->	Mostly XML	| Annotations + Java config
+Modularity	--> Heavy, rigid | Lightweight, modular
+Learning curve -->	Steep (EJBs, XML) | Steep initially, but powerful and flexible
+
 What is spring framework?
 - java based framework
 - opensource
@@ -31,7 +59,7 @@ that the users supply to the container (by means of XML or java annotations conf
 - They are wired and managed by IOC container
 
 What is IOC ?
-- We dont create object manually, spring does that for us
+- We don't create object manually, spring does that for us
 - Instead of your code controlling object creation,
   Spring inverts that control and handles object creation, wiring (dependencies), and lifecycle
   automatically at runtime.
