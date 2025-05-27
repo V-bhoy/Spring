@@ -1,9 +1,150 @@
-✅ 1. Why are we using redirect: in Spring MVC?
+SPRING WEB MVC
 
+What is MVC?
+- refers to Model, View, and Controller
+- a design pattern for making applications modular, testable, easier to maintain and scale.
+- divides a software application into three parts that are:
+  Model - data
+  View - data representation in the form of UI
+  Controller - business logic
+
+What is Spring MVC?
+- it is a sub framework of spring framework, built on top of java servlet API
+- follows the Model-View-Controller Architectural design pattern.
+- implements all spring core features like IOC, DI, Autowiring etc.
+Feature	--> Servlet, 	Spring MVC
+Manual request handling--->	✅ Yes,	❌ No
+Easy URL routing --->	❌ No,	✅ Yes (@GetMapping, @PostMapping)
+Form binding --->	❌ Manual parsing,	✅ Automatic with @ModelAttribute
+View resolution --->	Manual,	Auto via ViewResolver
+Architecture --->	Low-level,	High-level (MVC pattern)
+
+- Advantages:
+  - Uses a lightweight servlet container for the development and deployment of applications.
+  - Facilitates fast application development.
+  - due to modular architecture --> easy to test, maintain & scale the application
+  - improves performance
+  - Flexible in nature
+  - Less boilerplate code for configuration
+
+** Servlet API
+- Servlets are the Java programs that run on the Java-enabled web server or application server.
+- They are used to handle the request obtained from the webserver,
+  process the request, produce the response, then send a response back to the webserver.
+- In Java, to create web applications we use Servlets.
+- To create Java Servlets, we need to use Servlet API which contains
+  all the necessary interfaces and classes
+- Servlet API has 2 packages namely --> javax.servlet, javax.servlet.http
+
+What is a servlet ?
+A Servlet is a Java class used to handle HTTP requests and responses in a Java web application.
+	•	It’s part of Java EE (now Jakarta EE).
+	•	It runs on a web server (like Tomcat) that supports the Servlet API.
+	•	A servlet acts as the controller that accepts a request (like /login) and generates a response (like an HTML page or JSON).
+
+What is a Servlet Container?
+A Servlet Container is part of a web server (like Apache Tomcat) that:
+	•	Manages the lifecycle of servlets.
+	•	Maps URLs to the correct servlet class.
+	•	Handles multi-threading, security, and resource management.
+	•	Is responsible for converting HTTP requests/responses into Java objects (HttpServletRequest, HttpServletResponse).
+	🔧 Example: Tomcat, Jetty, Undertow are servlet containers.
+
+Why do we need Servlet + Servlet Container?
+Because:
+	•	Java doesn’t directly support HTTP natively.
+	•	You can’t just run a .java file and handle /login or /register.
+	•	The container acts as a bridge between the HTTP protocol and Java code.
+	•	Servlets + containers allow Java apps to be accessible via a browser.
+
+How do they come into picture in web applications?
+1.	Tomcat (container) receives the HTTP request.
+2.	It checks your app’s web.xml or @WebServlet annotations.
+3.	It maps /register to a Servlet class.
+4.	That servlet’s doGet() or doPost() is called.
+5.	It returns a response (HTML, JSON, etc.).
+
+Spring Web MVC architecture --->
+- First, the request will come in through the browser,
+  and it will be received by Dispatcher Servlet, which will act as Front Controller.
+- The front controller is the core element of the architecture
+- Dispatcher Servlet will take the help of handler mapping and
+  get to know the controller class name associated with the request.
+- After this, it will transfer the request to the controller,
+  and then the controller will process the request by executing appropriate methods
+  based on used GET or POST method. Controller: processes request and returns data/view.
+- It will return the ModelAndView object or Model or JSON back to the dispatcher servlet.
+- Now, the dispatcher servlet sends the model object to the view resolver in xml file
+  to get the view page.
+- And finally, the dispatcher servlet will pass the model object to the view page to display the result.
+
+Manual Configuration:
+- We do the servlet configuration in web.xml --> servlet & servlet-mapping
+- We do the view resolver configuration in .xml file
+- And then we use annotations for declaring controllers, services, repositories and models
+
+** Common Annotations:
+
+@Controller -
+- Marks a class as a Spring MVC Controller.
+- It’s a special stereotype annotation that makes the class discoverable for component scanning.
+
+@RestController -
+- Shortcut for @Controller + @ResponseBody.
+- Used when building REST APIs where responses are typically JSON or XML.
+
+@RequestMapping -
+- Used to map HTTP requests to handler methods or classes.
+- You can specify method, path, headers, etc.
+- Can also be placed at the class level to define a base path.
+
+@GetMapping, @PostMapping, @PutMapping, @DeleteMapping, @PatchMapping
+- Shorthand annotations for @RequestMapping(method = …)
+
+@RequestParam
+- Binds query parameters or form data from the URL/request body to a method argument.
+
+@PathVariable
+- Binds a path segment in the URL to a method argument.
+
+@ModelAttribute
+- Binds form fields from the view to a POJO (Java object), and adds it to the Model.
+- Also used at method level to preload data for views.
+
+@RequestBody
+- Used in REST APIs to bind the raw JSON/XML request body to a Java object.
+- Used with @RestController.
+
+@ResponseBody
+- Indicates the return value should be bound to the HTTP response body instead of rendering a view.
+- Mostly replaced by @RestController now.
+
+return "redirect:/target-url";
+- Redirects the client to a different URL (client-side redirect, new request).
+- to a different controller instead of just returning the view
+
+return "forward:/internal";
+- Internally forwards the request to another handler (server-side forward, same request object).
+
+Stereotype Annotations (Component Scanning)
+These annotations tell Spring to detect and manage these classes as Spring beans.
+@Component
+- Generic stereotype for any Spring-managed component.
+- Use when no other specific annotation fits.
+@Service
+- Specialization of @Component.
+- Used to mark business logic layer classes.
+@Repository
+- Specialization of @Component.
+- Used for Data Access Layer (DAO) classes.
+- used for database transactions
+@Controller, @RestController - covered earlier
+
+
+✅ 1. Why are we using redirect: in Spring MVC?
 We use redirect: in Spring MVC to redirect the user’s browser to a different URL after a POST request.
 
 ✳️ Common Use Case — Post/Redirect/Get Pattern (PRG)
-
 When a form is submitted via POST, we usually redirect to a GET endpoint after processing. This avoids issues like:
 	•	Form resubmission if the user refreshes the page (which can re-trigger a POST).
 	•	Cleaner URLs in the browser.
@@ -17,7 +158,6 @@ public String registerCar(@ModelAttribute Car car) {
 So instead of returning a view like "carDetails", we redirect to a URL (/car/ABC123), which will be handled by a GET controller.
 
 ✅ 2. When should you use redirect:?
-
 Use redirect: when:
 	•	You want to avoid form resubmission on page refresh (especially after POST).
 	•	You want to change the URL in the browser after an operation (e.g., /success or /details/123).
@@ -26,7 +166,6 @@ Use redirect: when:
 Don’t use redirect if you just want to return a view (e.g., return "home";).
 
 ✅ 3. Why use @RequestParam(required = false)?
-
 By default, @RequestParam expects the parameter to be present in the URL/query string. If it’s missing, and you didn’t mark it optional, Spring throws an error.
 
 ❌ Example that fails:
@@ -37,7 +176,6 @@ public String getCar(@RequestParam String owner) {
 }
 
 ✅ Safer version:
-
 @GetMapping("/car")
 public String getCar(@RequestParam(required = false) String owner) {
     // Will work even if owner is missing
@@ -46,7 +184,6 @@ public String getCar(@RequestParam(required = false) String owner) {
 So required = false makes the param optional.
 
 ✅ 4. Is @RequestParam required in the URL mapping?
-
 No — @RequestParam is used to extract query parameters from the URL, not from the path.
 
 @GetMapping("/car/details")
@@ -64,3 +201,20 @@ public String getById(@PathVariable int id) { }
 Annotation	Purpose	Source	Optional?
 @RequestParam	Extract query param	URL like ?key=value	Yes, with required=false
 @PathVariable	Extract from path segment	URL like /car/123	No by default
+
+What is Dispatcher Servlet in Spring MVC?
+- Dispatcher Servlet is the Front Controller in the Spring MVC framework.
+- This is a class that receives the incoming HTTP requests
+  and maps these requests to the appropriate resources such as model, controller, and view.
+- Also, it sends the appropriate responses to the requests.
+- Dispatcher Servlet manages the entire flow of an application.
+
+What is ViewResolver in Spring MVC?
+In Spring MVC, ViewResolver is used to determine how a logical view name is received from a controller
+and maps that to an actual file. There are different types of ViewResolver classes.
+Some of them are defined below:
+InternalResourceViewResolver: It uses a prefix and suffix to convert a logical view name.
+ResourceBundleViewResolver: It uses view beans inside property files to resolve view names.
+XMLViewResolver: It also resolves view names in XML files to beans defined in the configuration file.
+
+- For more interview questions, go on - geeks for geeks.
